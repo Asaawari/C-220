@@ -24,6 +24,12 @@ navigator.mediaDevices
         socket.on("user-connected",(userId)=>{
             connectToNewUser(userId,stream)
         })
+        peer.on("call",(call)=>{
+            call.answer(stream);
+            call.on("stream",(userVideoStream)=>{
+            addVideoStream(video,userVideoStream)
+        })
+      })
     })
 
 function connectToNewUser(userId,stream) {
